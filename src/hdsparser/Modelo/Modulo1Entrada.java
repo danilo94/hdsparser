@@ -35,7 +35,11 @@ public class Modulo1Entrada {
         this.nomeModulo = nomeModulo;
         this.identificador = identificador;
         this.wireWidth = wireWidth;
-        this.constant = constant;
+        if (nomeModulo == "REG"){
+            this.constant = "";
+        }else{
+            this.constant = constant;
+        }
     }
 
     public String getNomeModulo() {

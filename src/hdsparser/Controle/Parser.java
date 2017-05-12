@@ -31,6 +31,7 @@ public class Parser {
                     for (int i=0; i<substrings.length; i++){
                         if (substrings[i].equals("[name]")){
                             moduleName = substrings[i+1];
+                            SimbolTable.getInstance().setModuleName(moduleName);
                             break;
                         }
                     }

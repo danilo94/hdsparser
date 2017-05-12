@@ -9,7 +9,7 @@ import java.util.ArrayList;
 // Classe global que conta com tod
 
 public class SimbolTable {
-    
+    private  String moduleName;
     private static SimbolTable uniqueInstance;
     private static ArrayList<String> instrucoes_imediatas;
     private static ArrayList<String> instrucoes_2entradas;
@@ -20,8 +20,17 @@ public class SimbolTable {
     private static ArrayList<ModuloInterface> modulosInterface;
     private static ArrayList<Wire> listaFios;
 
+    public  String getModuleName() {
+        return moduleName;
+    }
+
+    public  void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     
     private SimbolTable(){
+        moduleName = "";
         listaFios = new ArrayList<>();
         instrucoes_imediatas = new ArrayList<>();
         instrucoes_2entradas = new ArrayList<>();

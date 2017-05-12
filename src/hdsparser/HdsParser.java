@@ -18,12 +18,16 @@ public class HdsParser {
           SimbolTable t1 = SimbolTable.getInstance();
           t1.insertItem("ADD", "type2");
           t1.insertItem("MULI", "type1");
-          t1.insertItem("REG","type2");
+          t1.insertItem("REG","type1");
           t1.insertItem("OUT", "typeI");
           t1.insertItem("IN_1", "typeI");
           t1.insertWire("SignalStdLogic1164");
           t1.insertWire("SignalStdLogicVector");
           Parser p1 = new Parser("/home/danilo/PycharmProjects/hdsParser/FiltroFir4.hds");
+          
+          System.out.println("Parsing Complete !!!!");
+          System.out.println("Wires: "+t1.getFios().size()+" Modulos Imediatos: "+t1.getModulosImediatos().size()+" Modulos de duas Entradas: "+t1.getModulosDuasEntradas().size());
+          
           
     }
     
