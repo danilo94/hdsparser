@@ -25,10 +25,6 @@ public class HdsParser {
           t1.insertWire("SignalStdLogicVector");
           Parser p1 = new Parser("/home/danilo/PycharmProjects/hdsParser/FiltroFir4.hds");
           
-          System.out.println(t1.getModulosImediatos().get(0).getClkWire());
-          System.out.println(t1.getModulosImediatos().get(0).getReset());
-          System.out.println(t1.getModulosDuasEntradas().get(0).getClkWire());
-          System.out.println(t1.getModulosDuasEntradas().get(0).getReset());
     }
     
 }

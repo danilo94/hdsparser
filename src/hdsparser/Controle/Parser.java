@@ -125,8 +125,21 @@ public class Parser {
                                    // System.out.println("Vetor");
                                     SimbolTable.getInstance().inserirfio(new Wire(substring[1],substring[2]));
                                     for (int i=4; i<substring.length-1; i+=2){
-                                    //    System.out.print(substring[i]+" ");
-                                    //    System.out.println(substring[i+1]);         
+                                        for (int j=0; j<SimbolTable.getInstance().getModulosImediatos().size(); j++){
+                                            Modulo1Entrada aux=null;
+                                            if (SimbolTable.getInstance().getModulosImediatos().get(j).getIdentificador().equals(substring[i])){
+                                                aux = SimbolTable.getInstance().getModulosImediatos().get(j);
+                                                simbolMatchModulo1Entrada(aux,substring[i+1],substring[1]);
+                                            } 
+                                        }
+
+                                        for (int j=0; j<SimbolTable.getInstance().getModulosDuasEntradas().size(); j++){
+                                            Modulo2Entradas aux=null;
+                                            if (SimbolTable.getInstance().getModulosDuasEntradas().get(j).getIdentificador().equals(substring[i])){
+                                                aux = SimbolTable.getInstance().getModulosDuasEntradas().get(j);
+                                                simbolMatchModulo2Entradas(aux,substring[i+1],substring[1]);
+                                            } 
+                                        }       
                                     }
                                     
                                     
@@ -175,7 +188,13 @@ public class Parser {
                 
             case "EN":
                 item.setEnable(wireName);
-                break;       
+                break;
+            case "D_IN":
+                item.setEntrada1(wireName);
+                break;
+            case "D_OUT":
+                item.setOutput(simbol);
+                break;
         }
     }
     
@@ -204,7 +223,16 @@ public class Parser {
                 break;
             case "EN":
                 item.setEnable(wireName);
-                break;       
+                break;
+            case "D_IN1":
+                item.setEntrada1(wireName);
+                break;
+            case "D_IN2":
+                item.setEntrada2(wireName);
+                break;
+            case "D_OUT":
+                item.setOutput(wireName);
+                break;
         }
     }
     
