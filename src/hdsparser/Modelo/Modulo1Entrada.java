@@ -19,8 +19,17 @@ public class Modulo1Entrada {
     private String enablein1;
     private String outR;
     private String output;
+    private String reset;
     private String wireWidth;
     private String constant;
+
+    public String getReset() {
+        return reset;
+    }
+
+    public void setReset(String reset) {
+        this.reset = reset;
+    }
 
     public Modulo1Entrada(String nomeModulo, String identificador, String wireWidth, String constant) {
         this.nomeModulo = nomeModulo;

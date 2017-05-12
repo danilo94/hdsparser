@@ -21,6 +21,15 @@ public class Modulo2Entradas{
     private String outR;
     private String output;
     private String wireWidth;
+    private String reset;
+
+    public String getReset() {
+        return reset;
+    }
+
+    public void setReset(String reset) {
+        this.reset = reset;
+    }
 
     public Modulo2Entradas(String nomeModulo, String identificador, String wireWidth) {
         this.nomeModulo = nomeModulo;

@@ -95,27 +95,38 @@ public class Parser {
                             String wireType = subWireString[subWireString.length-1];
                             switch(wireType){
                                 case "SignalStdLogic1164":
-                                    System.out.println("Unico");
+                                  //  System.out.println("Unico");
                                     SimbolTable.getInstance().inserirfio(new Wire(substring[1],"1"));
                                     for (int i=3; i<substring.length-1; i+=2){
                                         
                                         for (int j=0; j<SimbolTable.getInstance().getModulosImediatos().size(); j++){
                                             Modulo1Entrada aux=null;
-                                            if (SimbolTable.getInstance().getModulosImediatos().get(j).getIdentificador().equals(substring[j])){
+                                            if (SimbolTable.getInstance().getModulosImediatos().get(j).getIdentificador().equals(substring[i])){
                                                 aux = SimbolTable.getInstance().getModulosImediatos().get(j);
-                                            }
+                                                simbolMatchModulo1Entrada(aux,substring[i+1],substring[1]);
+                                            } 
                                         }
+
+                                        for (int j=0; j<SimbolTable.getInstance().getModulosDuasEntradas().size(); j++){
+                                            Modulo2Entradas aux=null;
+                                            if (SimbolTable.getInstance().getModulosDuasEntradas().get(j).getIdentificador().equals(substring[i])){
+                                                aux = SimbolTable.getInstance().getModulosDuasEntradas().get(j);
+                                                simbolMatchModulo2Entradas(aux,substring[i+1],substring[1]);
+                                            } 
+                                        }
+
+
                                         
-                                        System.out.print(substring[i]+" ");
-                                        System.out.println(substring[i+1]);
+                                     //   System.out.print(substring[i]+" ");
+                                     //   System.out.println(substring[i+1]);
                                     }
                                     break;
                                 case "SignalStdLogicVector":
-                                    System.out.println("Vetor");
+                                   // System.out.println("Vetor");
                                     SimbolTable.getInstance().inserirfio(new Wire(substring[1],substring[2]));
                                     for (int i=4; i<substring.length-1; i+=2){
-                                        System.out.print(substring[i]+" ");
-                                        System.out.println(substring[i+1]);         
+                                    //    System.out.print(substring[i]+" ");
+                                    //    System.out.println(substring[i+1]);         
                                     }
                                     
                                     
@@ -143,7 +154,59 @@ public class Parser {
     
     
     
+    private void simbolMatchModulo1Entrada(Modulo1Entrada item,String simbol,String wireName){
+       // System.out.println(item.getIdentificador());
+       // System.out.println(simbol);
+       // System.out.println(wireName);
+        
+        switch(simbol){
+            case "R_OUT":
+                item.setOutR(wireName);
+                break;
+            case "R_IN":
+                item.setEnablein1(wireName);
+                break;
+            case "RST":
+                item.setReset(wireName);
+                break;
+            case "CLK":
+                item.setClkWire(wireName);
+                break;
+                
+            case "EN":
+                item.setEnable(wireName);
+                break;       
+        }
+    }
     
+    
+    
+        private void simbolMatchModulo2Entradas(Modulo2Entradas item,String simbol,String wireName){
+       // System.out.println(item.getIdentificador());
+       // System.out.println(simbol);
+       // System.out.println(wireName);
+        
+        switch(simbol){
+            case "R_OUT":
+                item.setOutR(wireName);
+                break;
+            case "R_IN1":
+                item.setEnablein1(wireName);
+                break;
+            case "RST":
+                item.setReset(wireName);
+                break;
+            case "CLK":
+                item.setClkWire(wireName);
+                break;
+            case "R_IN2":
+                item.setEnablein2(wireName);
+                break;
+            case "EN":
+                item.setEnable(wireName);
+                break;       
+        }
+    }
     
     
 }
