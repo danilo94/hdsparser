@@ -98,6 +98,14 @@ public class Parser {
                                     System.out.println("Unico");
                                     SimbolTable.getInstance().inserirfio(new Wire(substring[1],"1"));
                                     for (int i=3; i<substring.length-1; i+=2){
+                                        
+                                        for (int j=0; j<SimbolTable.getInstance().getModulosImediatos().size(); j++){
+                                            Modulo1Entrada aux=null;
+                                            if (SimbolTable.getInstance().getModulosImediatos().get(j).getIdentificador().equals(substring[j])){
+                                                aux = SimbolTable.getInstance().getModulosImediatos().get(j);
+                                            }
+                                        }
+                                        
                                         System.out.print(substring[i]+" ");
                                         System.out.println(substring[i+1]);
                                     }
