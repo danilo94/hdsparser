@@ -76,6 +76,9 @@ public class Parser {
                                 default:
                                     break;
                             }
+                            if (!SimbolTable.getInstance().getModulosAInstanciar().contains(nomeOp)){
+                                SimbolTable.getInstance().getModulosAInstanciar().add(nomeOp);
+                            }
                             
                             
                             

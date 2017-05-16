@@ -26,7 +26,16 @@ public class HdsParser {
           Parser p1 = new Parser("/home/danilo/PycharmProjects/hdsParser/FiltroFir4.hds");
           
           System.out.println("Parsing Complete !!!!");
-          System.out.println("Wires: "+t1.getFios().size()+" Modulos Imediatos: "+t1.getModulosImediatos().size()+" Modulos de duas Entradas: "+t1.getModulosDuasEntradas().size());
+          
+          for (int i=0; i< SimbolTable.getInstance().getModulosAInstanciar().size(); i++){
+              System.out.println(SimbolTable.getInstance().getModulosAInstanciar().get(i));
+          }
+          
+          
+          
+          
+          
+        //  System.out.println("Wires: "+t1.getFios().size()+" Modulos Imediatos: "+t1.getModulosImediatos().size()+" Modulos de duas Entradas: "+t1.getModulosDuasEntradas().size());
           
           
     }

@@ -19,6 +19,7 @@ public class SimbolTable {
     private static ArrayList<Modulo2Entradas> modulosDuasEntradas;
     private static ArrayList<ModuloInterface> modulosInterface;
     private static ArrayList<Wire> listaFios;
+    private static ArrayList<String> modulosAInstanciar;
 
     public  String getModuleName() {
         return moduleName;
@@ -30,6 +31,7 @@ public class SimbolTable {
 
     
     private SimbolTable(){
+        modulosAInstanciar = new ArrayList<>();
         moduleName = "";
         listaFios = new ArrayList<>();
         instrucoes_imediatas = new ArrayList<>();
@@ -94,18 +96,16 @@ public class SimbolTable {
     }
     
     
-    
     public void inserirImediato(Modulo1Entrada item){
         modulosImediatos.add(item);
-    }
-    
-      public void inserir2Entradas(Modulo2Entradas item){
+    }    
+    public void inserir2Entradas(Modulo2Entradas item){
         modulosDuasEntradas.add(item);
     }
-        public void inserirInterface(ModuloInterface item){
+    public void inserirInterface(ModuloInterface item){
         modulosInterface.add(item);
     }
-        public void inserirfio (Wire item){
+    public void inserirfio (Wire item){
             listaFios.add(item);
         }
 
@@ -125,6 +125,8 @@ public class SimbolTable {
         return listaFios;
     }
       
-   
+    public ArrayList<String> getModulosAInstanciar(){
+        return modulosAInstanciar;
+    }
  
 }

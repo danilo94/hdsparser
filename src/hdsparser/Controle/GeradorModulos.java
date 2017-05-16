@@ -5,10 +5,8 @@
  */
 package hdsparser.Controle;
 
-/**
- *
- * @author danilo
- */
+
+
 public class GeradorModulos {
     
 }
