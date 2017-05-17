@@ -1,0 +1,15 @@
+# Este Arquivo irá armazenar o nome de todos os respectivos módulos do dataflow e a localização destes módulos
+
+SourceFiles Sources
+MULI Sources/muli.v type1
+ADD Sources/add.v type2
+REG Sources/reg.v type1
+wires
+SignalStdLogic1164
+SignalStdLogicVector
+endfile
+
+
+
+
+

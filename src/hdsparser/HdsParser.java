@@ -6,7 +6,10 @@
 package hdsparser;
 
 import Utils.SimbolTable.SimbolTable;
+import hdsparser.Controle.GeradorModulos;
 import hdsparser.Controle.Parser;
+import hdsparser.Controle.ParserConfig;
+import java.io.IOException;
 
 
 public class HdsParser {
@@ -14,28 +17,27 @@ public class HdsParser {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
           SimbolTable t1 = SimbolTable.getInstance();
-          t1.insertItem("ADD", "type2");
-          t1.insertItem("MULI", "type1");
-          t1.insertItem("REG","type1");
-          t1.insertItem("OUT", "typeI");
-          t1.insertItem("IN_1", "typeI");
-          t1.insertWire("SignalStdLogic1164");
-          t1.insertWire("SignalStdLogicVector");
+    //      t1.insertItem("ADD", "type2");
+    //      t1.insertItem("MULI", "type1");
+    //      t1.insertItem("REG","type1");
+       //   t1.insertItem("OUT", "typeI");
+       //   t1.insertItem("IN_1", "typeI");
+          ParserConfig parseConfiguration = new ParserConfig("ConfigFile.dat");
+    //      t1.insertWire("SignalStdLogic1164");
+    //      t1.insertWire("SignalStdLogicVector");
+           
           Parser p1 = new Parser("/home/danilo/PycharmProjects/hdsParser/FiltroFir4.hds");
           
-          System.out.println("Parsing Complete !!!!");
+          GeradorModulos.CreateProject();
           
-          for (int i=0; i< SimbolTable.getInstance().getModulosAInstanciar().size(); i++){
-              System.out.println(SimbolTable.getInstance().getModulosAInstanciar().get(i));
-          }
+         
           
           
           
           
           
-        //  System.out.println("Wires: "+t1.getFios().size()+" Modulos Imediatos: "+t1.getModulosImediatos().size()+" Modulos de duas Entradas: "+t1.getModulosDuasEntradas().size());
           
           
     }

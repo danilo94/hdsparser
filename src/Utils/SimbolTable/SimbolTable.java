@@ -4,12 +4,17 @@ package Utils.SimbolTable;
 import hdsparser.Modelo.Modulo1Entrada;
 import hdsparser.Modelo.Modulo2Entradas;
 import hdsparser.Modelo.ModuloInterface;
+import hdsparser.Modelo.ModuloaInstanciar;
 import hdsparser.Modelo.Wire;
 import java.util.ArrayList;
-// Classe global que conta com tod
+import java.util.HashMap;
+import java.util.Map;
+// Classe Singleton que agrupa todas as estruturas de dados utilizadas para elaborar o top level
 
 public class SimbolTable {
     private  String moduleName;
+    public  String folderLocation;
+    public  String sourceLocation;
     private static SimbolTable uniqueInstance;
     private static ArrayList<String> instrucoes_imediatas;
     private static ArrayList<String> instrucoes_2entradas;
@@ -20,6 +25,10 @@ public class SimbolTable {
     private static ArrayList<ModuloInterface> modulosInterface;
     private static ArrayList<Wire> listaFios;
     private static ArrayList<String> modulosAInstanciar;
+    private static Map<String,String> tabelaDeModulos;
+    public Map<String,String> getTabelaDeModulos() {
+        return tabelaDeModulos;
+    }
 
     public  String getModuleName() {
         return moduleName;
@@ -28,9 +37,10 @@ public class SimbolTable {
     public  void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
-
+    
     
     private SimbolTable(){
+        tabelaDeModulos = new HashMap<String,String>();
         modulosAInstanciar = new ArrayList<>();
         moduleName = "";
         listaFios = new ArrayList<>();
@@ -49,6 +59,9 @@ public class SimbolTable {
         }
         return uniqueInstance;
     }
+    
+    
+    
     
     public void insertItem(String instruction,String type){
         switch(type){

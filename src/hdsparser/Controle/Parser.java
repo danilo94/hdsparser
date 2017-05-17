@@ -197,7 +197,7 @@ public class Parser {
                 item.setEntrada1(wireName);
                 break;
             case "D_OUT":
-                item.setOutput(simbol);
+                item.setOutput(wireName);
                 break;
         }
     }
