@@ -1,17 +1,16 @@
 
 
-module add #
+module SHLI #
 (
-  parameter N = 16
+  parameter N = 16,
+  parameter I = 1
 )
 (
   input CLK,
   input RST,
   input EN,
-  input R_IN1,
-  input [N-1:0] D_IN1,
-  input R_IN2,
-  input [N-1:0] D_IN2,
+  input R_IN,
+  input [N-1:0] D_IN,
   output R_OUT,
   output [N-1:0] D_OUT
 );
@@ -28,9 +27,9 @@ module add #
     end else begin
       if(CLK) begin
         if(EN) begin
-          if(R_IN1 & R_IN2) begin
-            D_OUT_REG <= D_IN1 + D_IN2;
-            R_OUT_REG <= R_IN1;
+          if(R_IN) begin
+            D_OUT_REG <= D_IN << I;
+            R_OUT_REG <= R_IN;
           end else begin
             R_OUT_REG <= 0;
           end

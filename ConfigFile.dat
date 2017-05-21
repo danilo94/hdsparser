@@ -1,9 +1,35 @@
 # Este Arquivo irá armazenar o nome de todos os respectivos módulos do dataflow e a localização destes módulos
 
 SourceFiles Sources
-MULI Sources/muli.v type1
-ADD Sources/add.v type2
-REG Sources/reg.v type1
+
+ADD Sources/ADD.v type2
+ADDI Sources/ADDI.v type1
+AND Sources/AND.v type2
+ANDI Sources/ANDI.v type1
+BEQ Sources/BEQ.v type2
+BEQI Sources/BEQI.v type1
+BNE Sources/BNE.v type2
+BNEI Sources/BNEI.v type1
+DIV Sources/DIV.v type2
+DIVI Sources/DIVI.v type1
+MOD Sources/MOD.v type2
+MODI Sources/MODI.v type1
+MUL Sources/MUL.v type2
+MULI Sources/MULI.v type1
+OR Sources/OR.v type2
+ORI Sources/ORI.v type1
+REG Sources/REG.v type1
+SHL Sources/SHL.v type2
+SHLI Sources/SHLI.v type1
+SHR Sources/SHR.v type2
+SHRI Sources/SHRI.v type1
+SLT Sources/SLT.v type2
+SLTI Sources/SLTI.v type1
+SUB Sources/SUB.v type2
+SUBI Sources/SUBI.v type1
+IN_1 Sources/SUBI.v typeI
+
+
 wires
 SignalStdLogic1164
 SignalStdLogicVector

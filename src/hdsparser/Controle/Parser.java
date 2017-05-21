@@ -68,9 +68,33 @@ public class Parser {
                                     // Crio um novo objeto chamado do tipo Módulo duas entradas
                                     break;
                                 case 3:
-                                    identificador = subStrings[1];
-                                    wireWidth = subStrings[6];
-                                    SimbolTable.getInstance().inserirInterface(new ModuloInterface(nomeOp,identificador,wireWidth));
+                                    int quantidadeElementos = 0;
+                                    if (nomeOp.contains("IN_")){
+                                        try{
+                                            quantidadeElementos = Character.getNumericValue(nomeOp.toCharArray()[3]);
+                                            identificador = subStrings[1];
+                                            wireWidth = subStrings[6];
+                                            SimbolTable.getInstance().inserirInterface(new ModuloInterface(nomeOp,identificador,wireWidth,quantidadeElementos,"IN_"));                                        
+                                        }catch (NumberFormatException e) {
+                                            System.out.println("Numero com formato errado!");
+                                        }
+            
+                                    }else{
+                                        if (nomeOp.matches("OUT_")){
+                                            try{
+                                                quantidadeElementos = Character.getNumericValue(nomeOp.toCharArray()[4]);
+                                                identificador = subStrings[1];
+                                                wireWidth = subStrings[6];
+                                                SimbolTable.getInstance().inserirInterface(new ModuloInterface(nomeOp,identificador,wireWidth,quantidadeElementos,"OUT_"));                                        
+                                            }catch (NumberFormatException e) {
+                                                System.out.println("Numero com formato errado!");
+                                            }                                       
+                                       }
+                                    }
+                                    
+                                                                  
+
+                             
                                     // Crio um novo objeto do tipo Interface
                                     break;
                                 default:
@@ -104,7 +128,7 @@ public class Parser {
                                     for (int i=3; i<substring.length-1; i+=2){
                                         
                                         for (int j=0; j<SimbolTable.getInstance().getModulosImediatos().size(); j++){
-                                            Modulo1Entrada aux=null;
+                                            Modulo1Entrada aux;
                                             if (SimbolTable.getInstance().getModulosImediatos().get(j).getIdentificador().equals(substring[i])){
                                                 aux = SimbolTable.getInstance().getModulosImediatos().get(j);
                                                 simbolMatchModulo1Entrada(aux,substring[i+1],substring[1]);
@@ -112,17 +136,23 @@ public class Parser {
                                         }
 
                                         for (int j=0; j<SimbolTable.getInstance().getModulosDuasEntradas().size(); j++){
-                                            Modulo2Entradas aux=null;
+                                            Modulo2Entradas aux;
                                             if (SimbolTable.getInstance().getModulosDuasEntradas().get(j).getIdentificador().equals(substring[i])){
                                                 aux = SimbolTable.getInstance().getModulosDuasEntradas().get(j);
                                                 simbolMatchModulo2Entradas(aux,substring[i+1],substring[1]);
                                             } 
                                         }
-
+                                        
+                                        for (int j=0; j<SimbolTable.getInstance().getModulosInterface().size(); j++){
+                                            ModuloInterface aux;
+                                            
+                                        }
+                                               
+                                        
+                                        
+                                        
 
                                         
-                                     //   System.out.print(substring[i]+" ");
-                                     //   System.out.println(substring[i+1]);
                                     }
                                     break;
                                 case "SignalStdLogicVector":
@@ -130,7 +160,7 @@ public class Parser {
                                     SimbolTable.getInstance().inserirfio(new Wire(substring[1],substring[2]));
                                     for (int i=4; i<substring.length-1; i+=2){
                                         for (int j=0; j<SimbolTable.getInstance().getModulosImediatos().size(); j++){
-                                            Modulo1Entrada aux=null;
+                                            Modulo1Entrada aux;
                                             if (SimbolTable.getInstance().getModulosImediatos().get(j).getIdentificador().equals(substring[i])){
                                                 aux = SimbolTable.getInstance().getModulosImediatos().get(j);
                                                 simbolMatchModulo1Entrada(aux,substring[i+1],substring[1]);
@@ -138,7 +168,7 @@ public class Parser {
                                         }
 
                                         for (int j=0; j<SimbolTable.getInstance().getModulosDuasEntradas().size(); j++){
-                                            Modulo2Entradas aux=null;
+                                            Modulo2Entradas aux;
                                             if (SimbolTable.getInstance().getModulosDuasEntradas().get(j).getIdentificador().equals(substring[i])){
                                                 aux = SimbolTable.getInstance().getModulosDuasEntradas().get(j);
                                                 simbolMatchModulo2Entradas(aux,substring[i+1],substring[1]);

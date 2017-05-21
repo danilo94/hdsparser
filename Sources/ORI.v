@@ -1,4 +1,6 @@
-module MULI #
+
+
+module ORI #
 (
   parameter N = 16,
   parameter I = 1
@@ -26,7 +28,7 @@ module MULI #
       if(CLK) begin
         if(EN) begin
           if(R_IN) begin
-            D_OUT_REG <= D_IN * I;
+            D_OUT_REG <= D_IN | I;
             R_OUT_REG <= R_IN;
           end else begin
             R_OUT_REG <= 0;
@@ -35,5 +37,7 @@ module MULI #
       end 
     end
   end
+
+
 endmodule
 

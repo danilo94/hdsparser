@@ -5,6 +5,8 @@
  */
 package hdsparser.Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author danilo
@@ -12,15 +14,17 @@ package hdsparser.Modelo;
 public class ModuloInterface{
     private String nomeModulo;
     private String identificador;
-    private String entrada1;
-    private String enable;
-    private String clkWire;
-    private String enablein1;
-    private String outR;
-    private String output;
     private String wireWidth;
+    private String tipoInterface;
+    private int elements;
+    private ArrayList <String> inputs;
+    private ArrayList <String> outputs;
 
-    public ModuloInterface(String nomeModulo, String identificador, String wireWidth) {
+    public ModuloInterface(String nomeModulo, String identificador, String wireWidth, int elements, String tipoInterface) {
+        this.tipoInterface = tipoInterface;
+        this.elements = elements;
+        inputs = new ArrayList<>();
+        outputs = new ArrayList<>();
         this.nomeModulo = nomeModulo;
         this.identificador = identificador;
         this.wireWidth = wireWidth;
@@ -41,55 +45,7 @@ public class ModuloInterface{
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
-
-    public String getEntrada1() {
-        return entrada1;
-    }
-
-    public void setEntrada1(String entrada1) {
-        this.entrada1 = entrada1;
-    }
-
-    public String getEnable() {
-        return enable;
-    }
-
-    public void setEnable(String enable) {
-        this.enable = enable;
-    }
-
-    public String getClkWire() {
-        return clkWire;
-    }
-
-    public void setClkWire(String clkWire) {
-        this.clkWire = clkWire;
-    }
-
-    public String getEnablein1() {
-        return enablein1;
-    }
-
-    public void setEnablein1(String enablein1) {
-        this.enablein1 = enablein1;
-    }
-
-    public String getOutR() {
-        return outR;
-    }
-
-    public void setOutR(String outR) {
-        this.outR = outR;
-    }
-
-    public String getOutput() {
-        return output;
-    }
-
-    public void setOutput(String output) {
-        this.output = output;
-    }
-
+    
     public String getWireWidth() {
         return wireWidth;
     }
@@ -97,5 +53,14 @@ public class ModuloInterface{
     public void setWireWidth(String wireWidth) {
         this.wireWidth = wireWidth;
     }
-    
+   
+    public void insereLista (String fio){
+        if (tipoInterface.equals("IN_")){
+            outputs.add(fio);
+        }else{
+            if  (tipoInterface.endsWith("OUT_")){
+                inputs.add(fio);
+            }
+        }
+    }
 }

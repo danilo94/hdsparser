@@ -1,8 +1,4 @@
-`include "add.v"
-`include "muli.v"
-`include "reg.v"
-
-module firFilter(input enable,input clk, input rst, input [15:0] dataIn,input rin);
+module firFilter();
 wire [1-1:0]en_wire;
 wire [16-1:0]n9;
 wire [1-1:0]n8;
@@ -24,13 +20,6 @@ wire [1-1:0]n12;
 wire [1-1:0]n11;
 wire [16-1:0]n10;
 wire [1-1:0]clock_wire;
-
-assign clock_wire = clk;
-assign en_wire = enable;
-assign reset_wire = rst;
-assign n14 = dataIn;
-assign n16 = rin;
-
 REG #(.N(16),.I(1.0E-8)) REG0(.CLK(clock_wire),.RST(reset_wire),.EN(en_wire),.R_IN(n1),.D_IN(n0),.R_OUT(n3),.D_OUT(n2));
 MULI #(.N(16),.I(4)) MULI1(.CLK(clock_wire),.RST(reset_wire),.EN(en_wire),.R_IN(n16),.D_IN(n14),.R_OUT(n1),.D_OUT(n0));
 MULI #(.N(16),.I(3)) MULI2(.CLK(clock_wire),.RST(reset_wire),.EN(en_wire),.R_IN(n16),.D_IN(n14),.R_OUT(n4),.D_OUT(n5));

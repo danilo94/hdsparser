@@ -1,4 +1,6 @@
-module MULI #
+
+
+module muli #
 (
   parameter N = 16,
   parameter I = 1
@@ -35,5 +37,7 @@ module MULI #
       end 
     end
   end
+
+
 endmodule
 

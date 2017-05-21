@@ -1,6 +1,6 @@
 
 
-module add #
+module BNE #
 (
   parameter N = 16
 )
@@ -29,8 +29,12 @@ module add #
       if(CLK) begin
         if(EN) begin
           if(R_IN1 & R_IN2) begin
-            D_OUT_REG <= D_IN1 + D_IN2;
-            R_OUT_REG <= R_IN1;
+            if(D_IN1 != D_IN2) begin
+              D_OUT_REG <= 1;
+              R_OUT_REG <= R_IN1;
+            end else begin
+              D_OUT_REG <= 0;
+            end
           end else begin
             R_OUT_REG <= 0;
           end

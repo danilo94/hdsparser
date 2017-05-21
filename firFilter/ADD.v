@@ -1,6 +1,6 @@
 
 
-module add #
+module ADD #
 (
   parameter N = 16
 )
