@@ -13,7 +13,7 @@ if (rst) begin
  r_out <= 1;
 end else begin
   if (out == 10) begin
-   r_out<=1;
+   r_out<=0;
    out <=0;
   end
   else begin

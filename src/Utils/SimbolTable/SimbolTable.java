@@ -4,7 +4,6 @@ package Utils.SimbolTable;
 import hdsparser.Modelo.Modulo1Entrada;
 import hdsparser.Modelo.Modulo2Entradas;
 import hdsparser.Modelo.ModuloInterface;
-import hdsparser.Modelo.ModuloaInstanciar;
 import hdsparser.Modelo.Wire;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public class SimbolTable {
     
     
     private SimbolTable(){
-        tabelaDeModulos = new HashMap<String,String>();
+        tabelaDeModulos = new HashMap<>();
         modulosAInstanciar = new ArrayList<>();
         moduleName = "";
         listaFios = new ArrayList<>();
