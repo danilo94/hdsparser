@@ -17,18 +17,44 @@ public class ModuloInterface{
     private String wireWidth;
     private String tipoInterface;
     private int elements;
+    private int interfacesCreated=1;
+    private ArrayList <String> names;
     private ArrayList <String> inputs;
     private ArrayList <String> outputs;
+    private  ArrayList <String> rIn;
+    private  String rOut;
+    private ArrayList <String> namesRinRout;
+
+    public String getrOut() {
+        return rOut;
+    }
+
+    public void setrOut(String rOut) {
+        this.rOut = rOut;
+    }
+
+    public int getInterfacesCreated() {
+        return interfacesCreated;
+    }
+
+    public void setInterfacesCreated(int interfacesCreated) {
+        this.interfacesCreated = interfacesCreated;
+    }
 
     public ModuloInterface(String nomeModulo, String identificador, String wireWidth, int elements, String tipoInterface) {
+        namesRinRout = new ArrayList<>();
+        rIn = new ArrayList<>();
         this.tipoInterface = tipoInterface;
         this.elements = elements;
+        names = new ArrayList<>();
         inputs = new ArrayList<>();
         outputs = new ArrayList<>();
         this.nomeModulo = nomeModulo;
         this.identificador = identificador;
         this.wireWidth = wireWidth;
     }
+
+    
 
     public String getNomeModulo() {
         return nomeModulo;
@@ -53,14 +79,64 @@ public class ModuloInterface{
     public void setWireWidth(String wireWidth) {
         this.wireWidth = wireWidth;
     }
+
+    public ArrayList<String> getNames() {
+        return names;
+    }
+
+    public void setNames(ArrayList<String> names) {
+        this.names = names;
+    }
+
+    public ArrayList<String> getInputs() {
+        return inputs;
+    }
+
+    public String getTipoInterface() {
+        return tipoInterface;
+    }
+
+    public void setTipoInterface(String tipoInterface) {
+        this.tipoInterface = tipoInterface;
+    }
+
+    public void setInputs(ArrayList<String> inputs) {
+        this.inputs = inputs;
+    }
+
+    public ArrayList<String> getOutputs() {
+        return outputs;
+    }
+
+    public void setOutputs(ArrayList<String> outputs) {
+        this.outputs = outputs;
+    }
    
-    public void insereLista (String fio){
+    public void insereLista (String fio,String name){
         if (tipoInterface.equals("IN_")){
             outputs.add(fio);
+            names.add(name);
         }else{
-            if  (tipoInterface.endsWith("OUT_")){
+            if  (tipoInterface.endsWith("OUT")){
                 inputs.add(fio);
+                outputs.add(fio);
+                names.add(name);
             }
         }
     }
+    
+    
+    public void insereRinRout (String fio, String name){
+        if (tipoInterface.equals("IN_")){
+            namesRinRout.add(name);
+            
+        }else{
+            if (tipoInterface.equals("OUT")){
+                
+            }
+        }
+    }
+    
+    
+    
 }

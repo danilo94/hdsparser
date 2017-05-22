@@ -8,6 +8,7 @@ package hdsparser.Controle;
 import Utils.SimbolTable.SimbolTable;
 import hdsparser.Modelo.Modulo1Entrada;
 import hdsparser.Modelo.Modulo2Entradas;
+import hdsparser.Modelo.ModuloInterface;
 import hdsparser.Modelo.Wire;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,8 +20,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 
@@ -47,25 +47,10 @@ public class GeradorModulos {
             }
         }
         CreateTopLevel();
-        
-        
-        
-        
-        
-        
+   
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
     
     private static void CreateTopLevel(){
@@ -74,16 +59,97 @@ public class GeradorModulos {
         ArrayList<Wire> listaFios = SimbolTable.getInstance().getFios();
         ArrayList<Modulo1Entrada> modulosImediatos = SimbolTable.getInstance().getModulosImediatos();
         ArrayList<Modulo2Entradas> modulos2Entradas = SimbolTable.getInstance().getModulosDuasEntradas();
+        ArrayList<ModuloInterface> modulosInterface = SimbolTable.getInstance().getModulosInterface();
         try {
             FileWriter writer = new FileWriter(topLevelFolder+topLevelName+".v");
             BufferedWriter buffWriter = new BufferedWriter(writer);
+            //);\n
             
-            buffWriter.write("module "+topLevelName+"();\n");
+         
+            buffWriter.write("//Criação da interface com o mundo exterior\n");
+
+            buffWriter.write("module "+topLevelName+"(");
+            
             // Esta função será responsável por gerar todas as ligações entre as estruturas que irão compor o top level
+            // Criação da interface com o exterior
+            for (int i=0; i<modulosInterface.size(); i++){
+                for (int j=0; j<modulosInterface.get(i).getNames().size(); j++){
+                    if (modulosInterface.get(i).getTipoInterface().equals("IN_")){
+                        buffWriter.write(modulosInterface.get(i).getNames().get(j)+",");
+                    }else{
+                      if (modulosInterface.get(i).getTipoInterface().equals("OUT")){
+                        buffWriter.write(modulosInterface.get(i).getNames().get(j)+",");
+                        buffWriter.write("r_out,");
+                    }  
+                    }
+                }
+            }
             
+            buffWriter.write(" clk, rst, enable);\n");
+            
+            buffWriter.write("input clk,rst,enable;\n");
+            // Criação da interface com o exterior
+            for (int i=0; i<modulosInterface.size(); i++){
+                for (int j=0; j<modulosInterface.get(i).getNames().size(); j++){
+                    if (modulosInterface.get(i).getTipoInterface().equals("IN_")){
+                        buffWriter.write("input ["+modulosInterface.get(i).getWireWidth()+"-1:0]"  +modulosInterface.get(i).getNames().get(j)+";\n");
+                    }else{
+                      if (modulosInterface.get(i).getTipoInterface().equals("OUT")){
+                        buffWriter.write("output ["+modulosInterface.get(i).getWireWidth()+"-1:0]"  +modulosInterface.get(i).getNames().get(j)+";\n");
+                        buffWriter.write("output r_out;\n");
+                      }  
+                    }
+                }
+            }            
+            
+            buffWriter.write("//Fim da criação da interface com o mundo exterior\n");
+
+            buffWriter.write("//Fim da criação da interface com o mundo exterior\n");
+
             for (int i=0; i<listaFios.size(); i++){
                 buffWriter.write("wire ["+listaFios.get(i).getWire_Width()+"-1:0]"+listaFios.get(i).getId()+";\n");
             }
+            
+            for (int i=0; i<listaFios.size(); i++){
+                if (listaFios.get(i).getId().contains("clock")){
+                    buffWriter.write("assign "+listaFios.get(i).getId()+"= clk;\n");
+                }else{
+                    if (listaFios.get(i).getId().contains("reset")){
+                        buffWriter.write("assign "+listaFios.get(i).getId()+"= rst;\n");
+                    }else{
+                        
+                    if (listaFios.get(i).getId().contains("en_")){
+                        buffWriter.write("assign "+listaFios.get(i).getId()+"= enable;\n");
+                    }                       
+                        
+                    }
+                }
+            }
+             
+            for (int i=0; i<modulosInterface.size(); i++){
+                for (int j=0; j<modulosInterface.get(i).getNames().size(); j++){
+                    if (modulosInterface.get(i).getTipoInterface().equals("IN_")){
+                        buffWriter.write("assign "+modulosInterface.get(i).getOutputs().get(j)+"="+modulosInterface.get(i).getNames().get(j)+";\n");
+                    }else{
+                      if (modulosInterface.get(i).getTipoInterface().equals("OUT")){
+                        buffWriter.write("assign "+modulosInterface.get(i).getNames().get(j)+"="+modulosInterface.get(i).getOutputs().get(j)+";\n");
+                        buffWriter.write("assign r_out = "+modulosInterface.get(i).getrOut()+";\n" );
+                      }  
+                    }
+                }
+            }              
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             for (int i=0; i<modulosImediatos.size(); i++){
                 buffWriter.write(modulosImediatos.get(i).getNomeModulo()+" #(.N("+modulosImediatos.get(i).getWireWidth()+"),.I("+modulosImediatos.get(i).getConstant()+")) "+modulosImediatos.get(i).getNomeModulo()+i+

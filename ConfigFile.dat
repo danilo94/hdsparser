@@ -27,7 +27,8 @@ SLT Sources/SLT.v type2
 SLTI Sources/SLTI.v type1
 SUB Sources/SUB.v type2
 SUBI Sources/SUBI.v type1
-IN_1 Sources/SUBI.v typeI
+IN_1 @ typeI
+OUT @ typeI
 
 
 wires

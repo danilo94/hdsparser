@@ -22,7 +22,7 @@ firFilter fir4_(
   .rst(rst),
   .enable(en),
   .rin(r_out),
-  .dataIn(cont_in)
+  .dataIn1(cont_in)
  );
 
 endmodule

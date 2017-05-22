@@ -78,14 +78,12 @@ public class Parser {
                                         }catch (NumberFormatException e) {
                                             System.out.println("Numero com formato errado!");
                                         }
-            
                                     }else{
-                                        if (nomeOp.matches("OUT_")){
+                                        if (nomeOp.contains("OUT")){
                                             try{
-                                                quantidadeElementos = Character.getNumericValue(nomeOp.toCharArray()[4]);
                                                 identificador = subStrings[1];
                                                 wireWidth = subStrings[6];
-                                                SimbolTable.getInstance().inserirInterface(new ModuloInterface(nomeOp,identificador,wireWidth,quantidadeElementos,"OUT_"));                                        
+                                                SimbolTable.getInstance().inserirInterface(new ModuloInterface(nomeOp,identificador,wireWidth,1,"OUT"));                                        
                                             }catch (NumberFormatException e) {
                                                 System.out.println("Numero com formato errado!");
                                             }                                       
@@ -145,6 +143,10 @@ public class Parser {
                                         
                                         for (int j=0; j<SimbolTable.getInstance().getModulosInterface().size(); j++){
                                             ModuloInterface aux;
+                                            if (SimbolTable.getInstance().getModulosInterface().get(j).getIdentificador().equals(substring[i])){
+                                                aux = SimbolTable.getInstance().getModulosInterface().get(j);
+                                                simbolMatchInterface(aux,substring[i+1],substring[1]);
+                                            }
                                             
                                         }
                                                
@@ -173,15 +175,17 @@ public class Parser {
                                                 aux = SimbolTable.getInstance().getModulosDuasEntradas().get(j);
                                                 simbolMatchModulo2Entradas(aux,substring[i+1],substring[1]);
                                             } 
-                                        }       
+                                        }
+                                        
+                                        for (int j=0; j<SimbolTable.getInstance().getModulosInterface().size(); j++){
+                                            ModuloInterface aux;
+                                            if (SimbolTable.getInstance().getModulosInterface().get(j).getIdentificador().equals(substring[i])){
+                                                aux = SimbolTable.getInstance().getModulosInterface().get(j);
+                                                simbolMatchInterface(aux,substring[i+1],substring[1]);
+                                            }
+                                            
+                                        }                                   
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
                                     break;
                             }
 
@@ -232,13 +236,10 @@ public class Parser {
         }
     }
     
-    
-    
         private void simbolMatchModulo2Entradas(Modulo2Entradas item,String simbol,String wireName){
        // System.out.println(item.getIdentificador());
        // System.out.println(simbol);
-       // System.out.println(wireName);
-        
+       // System.out.println(wireName); 
         switch(simbol){
             case "R_OUT":
                 item.setOutR(wireName);
@@ -269,6 +270,37 @@ public class Parser {
                 break;
         }
     }
-    
+        
+        
+    private void simbolMatchInterface(ModuloInterface item, String simbol, String wireName){
+        String newSimbolIn="D_OUT";
+        newSimbolIn = newSimbolIn+item.getInterfacesCreated();
+        if (simbol.equals(newSimbolIn)){
+            item.insereLista(wireName,"dataIn"+item.getInterfacesCreated());
+            item.setInterfacesCreated(item.getInterfacesCreated()+1);
+        }else{
+            String newSimbolOut = "D_IN";
+            if (simbol.equals(newSimbolOut)){
+                item.insereLista(wireName, "dataOut"+item.getInterfacesCreated());
+                item.setInterfacesCreated(item.getInterfacesCreated()+1);
+            }
+            
+            else {
+                switch (simbol){
+                    case "EN_OUT":
+                        break;
+                    case "R_IN":
+                        item.setrOut(wireName);
+                        break;
+                }
+            }
+
+        }
+        
+
+            
+    }
+
+        
     
 }

@@ -56,6 +56,7 @@ public class ParserConfig {
             else {
                if (substrings.length==3 && stage == 0){
                 SimbolTable.getInstance().insertItem(substrings[0],substrings[2]);
+                if (!substrings[1].equals("@"))
                 SimbolTable.getInstance().getTabelaDeModulos().put(substrings[0],substrings[1]);
              //  SimbolTable.getInstance().getTabelaDeModulos.add();
                }
