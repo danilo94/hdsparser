@@ -284,7 +284,14 @@ public class Parser {
                 item.insereLista(wireName, "dataOut"+item.getInterfacesCreated());
                 item.setInterfacesCreated(item.getInterfacesCreated()+1);
             }
-            
+            else{
+                
+                String  newSimbolrOut = "R_OUT";
+                newSimbolrOut = newSimbolrOut + item.getInterfacesCreated();
+                if (simbol.equals(newSimbolrOut)){               
+                item.insereRinRout(wireName, "rIn"+item.getInterfacesCreated());
+                item.setrInCreated(item.getrInCreated()+1);                    
+                }
             else {
                 switch (simbol){
                     case "EN_OUT":
@@ -293,12 +300,16 @@ public class Parser {
                         item.setrOut(wireName);
                         break;
                 }
+            }                
             }
+            
+            
+            
+            
+            
+            
 
         }
-        
-
-            
     }
 
         

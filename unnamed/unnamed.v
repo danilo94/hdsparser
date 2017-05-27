@@ -1,0 +1,35 @@
+module unnamed(dataOut1,r_out,dataIn1, clk, rst, enable);
+input clk,rst,enable;
+output [16-1:0]dataOut1;
+output r_out;
+input [16-1:0]dataIn1;
+//Fim da criação da interface com o mundo exterior
+wire [1-1:0]en_wire;
+wire [16-1:0]n9;
+wire [16-1:0]n8;
+wire [1-1:0]n7;
+wire [16-1:0]n6;
+wire [16-1:0]n5;
+wire [1-1:0]n4;
+wire [1-1:0]n3;
+wire [1-1:0]n2;
+wire [1-1:0]n15;
+wire [16-1:0]n1;
+wire [1-1:0]n14;
+wire [1-1:0]n0;
+wire [1-1:0]n13;
+wire [1-1:0]n12;
+wire [16-1:0]n11;
+wire [16-1:0]n10;
+assign en_wire= enable;
+assign dataOut1=n9;
+assign r_out = n2;
+assign n1=dataIn1;
+REG #(.N(16),.I(1.0E-8)) REG0(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN(n4),.D_IN(n5),.R_OUT(null),.D_OUT(n11));
+REG #(.N(16),.I(1.0E-8)) REG1(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN(n7),.D_IN(n6),.R_OUT(null),.D_OUT(n10));
+MULI #(.N(16),.I(2)) MULI2(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN(n0),.D_IN(n1),.R_OUT(n4),.D_OUT(n5));
+MODI #(.N(16),.I(2)) MODI3(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN(n0),.D_IN(n1),.R_OUT(n3),.D_OUT(n8));
+BEQI #(.N(16),.I(0)) BEQI4(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN(n3),.D_IN(n8),.R_OUT(null),.D_OUT(null));
+MULI #(.N(16),.I(3)) MULI5(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN(n0),.D_IN(n1),.R_OUT(n7),.D_OUT(n6));
+MERGE #(.N(16)) MERGE0(.CLK(n15),.RST(n14),.EN(en_wire),.R_IN1(n13),.D_IN1(n11),.R_OUT(n2),.D_OUT(n9),.D_IN2(n10),.R_IN2(n12));
+endmodule

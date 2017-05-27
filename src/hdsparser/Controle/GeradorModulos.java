@@ -64,18 +64,16 @@ public class GeradorModulos {
             FileWriter writer = new FileWriter(topLevelFolder+topLevelName+".v");
             BufferedWriter buffWriter = new BufferedWriter(writer);
             //);\n
-            
-         
-            buffWriter.write("//Criação da interface com o mundo exterior\n");
-
-            buffWriter.write("module "+topLevelName+"(");
-            
+            buffWriter.write("module "+topLevelName+"(");  
             // Esta função será responsável por gerar todas as ligações entre as estruturas que irão compor o top level
             // Criação da interface com o exterior
             for (int i=0; i<modulosInterface.size(); i++){
                 for (int j=0; j<modulosInterface.get(i).getNames().size(); j++){
                     if (modulosInterface.get(i).getTipoInterface().equals("IN_")){
                         buffWriter.write(modulosInterface.get(i).getNames().get(j)+",");
+                        for (int k=0; k<modulosInterface.get(i).getNamesRinRout().size(); k++){
+                           buffWriter.write(modulosInterface.get(i).getNamesRinRout().get(k)+",");
+                        }    
                     }else{
                       if (modulosInterface.get(i).getTipoInterface().equals("OUT")){
                         buffWriter.write(modulosInterface.get(i).getNames().get(j)+",");
@@ -93,6 +91,9 @@ public class GeradorModulos {
                 for (int j=0; j<modulosInterface.get(i).getNames().size(); j++){
                     if (modulosInterface.get(i).getTipoInterface().equals("IN_")){
                         buffWriter.write("input ["+modulosInterface.get(i).getWireWidth()+"-1:0]"  +modulosInterface.get(i).getNames().get(j)+";\n");
+                        for (int k=0; k<modulosInterface.get(i).getNamesRinRout().size(); k++){
+                           buffWriter.write("input "+modulosInterface.get(i).getNamesRinRout().get(k)+";\n");
+                        }                        
                     }else{
                       if (modulosInterface.get(i).getTipoInterface().equals("OUT")){
                         buffWriter.write("output ["+modulosInterface.get(i).getWireWidth()+"-1:0]"  +modulosInterface.get(i).getNames().get(j)+";\n");
@@ -102,8 +103,6 @@ public class GeradorModulos {
                 }
             }            
             
-            buffWriter.write("//Fim da criação da interface com o mundo exterior\n");
-
             buffWriter.write("//Fim da criação da interface com o mundo exterior\n");
 
             for (int i=0; i<listaFios.size(); i++){
@@ -130,6 +129,11 @@ public class GeradorModulos {
                 for (int j=0; j<modulosInterface.get(i).getNames().size(); j++){
                     if (modulosInterface.get(i).getTipoInterface().equals("IN_")){
                         buffWriter.write("assign "+modulosInterface.get(i).getOutputs().get(j)+"="+modulosInterface.get(i).getNames().get(j)+";\n");
+                        for (int k=0; k<modulosInterface.get(i).getNamesRinRout().size(); k++){
+                           buffWriter.write("assign "+modulosInterface.get(i).getrIn().get(k)+"="+modulosInterface.get(i).getNamesRinRout().get(k)+";\n");
+                        }  
+                        
+                        
                     }else{
                       if (modulosInterface.get(i).getTipoInterface().equals("OUT")){
                         buffWriter.write("assign "+modulosInterface.get(i).getNames().get(j)+"="+modulosInterface.get(i).getOutputs().get(j)+";\n");

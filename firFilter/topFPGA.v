@@ -21,7 +21,7 @@ firFilter fir4_(
   .clk(clk),
   .rst(rst),
   .enable(en),
-  .rin(r_out),
+  .rIn1(r_out),
   .dataIn1(cont_in)
  );
 

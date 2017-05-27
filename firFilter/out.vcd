@@ -1,5 +1,5 @@
 $date
-	Sun May 21 21:04:14 2017
+	Mon May 22 15:23:35 2017
 $end
 $version
 	Icarus Verilog
@@ -51,9 +51,9 @@ $var wire 16 ? n6 [15:0] $end
 $var wire 1 @ n7 $end
 $var wire 1 A n8 $end
 $var wire 16 B n9 [15:0] $end
+$var wire 1 ) rIn1 $end
 $var wire 1 C r_out $end
 $var wire 1 D reset_wire $end
-$var wire 1 ) rin $end
 $var wire 1 * rst $end
 $scope module REG0 $end
 $var wire 1 - CLK $end

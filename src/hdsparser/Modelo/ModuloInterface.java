@@ -16,8 +16,17 @@ public class ModuloInterface{
     private String identificador;
     private String wireWidth;
     private String tipoInterface;
+
+    public int getrInCreated() {
+        return rInCreated;
+    }
+
+    public void setrInCreated(int rInCreated) {
+        this.rInCreated = rInCreated;
+    }
     private int elements;
     private int interfacesCreated=1;
+    private int rInCreated=1;
     private ArrayList <String> names;
     private ArrayList <String> inputs;
     private ArrayList <String> outputs;
@@ -129,12 +138,29 @@ public class ModuloInterface{
     public void insereRinRout (String fio, String name){
         if (tipoInterface.equals("IN_")){
             namesRinRout.add(name);
+            rIn.add(fio);
             
         }else{
             if (tipoInterface.equals("OUT")){
                 
             }
         }
+    }
+
+    public ArrayList<String> getrIn() {
+        return rIn;
+    }
+
+    public void setrIn(ArrayList<String> rIn) {
+        this.rIn = rIn;
+    }
+
+    public ArrayList<String> getNamesRinRout() {
+        return namesRinRout;
+    }
+
+    public void setNamesRinRout(ArrayList<String> namesRinRout) {
+        this.namesRinRout = namesRinRout;
     }
     
     

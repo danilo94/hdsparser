@@ -28,8 +28,8 @@ public class HdsParser {
     //      t1.insertWire("SignalStdLogic1164");
     //      t1.insertWire("SignalStdLogicVector");
            
-          Parser p1 = new Parser("/home/danilo/PycharmProjects/hdsParser/FiltroFir4.hds");
-          
+        //  Parser p1 = new Parser("/home/danilo/PycharmProjects/hdsParser/FiltroFir4.hds");
+          Parser p1 = new Parser("/home/danilo/NetBeansProjects/hdsParser/BRANCH_TEST_DATAFLOW.hds");
           GeradorModulos.CreateProject();
           
          

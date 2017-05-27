@@ -1,15 +1,14 @@
 `include "REG.v"
-`include "ADD.v"
 `include "MULI.v"
+`include "ADD.v"
 
-//Criação da interface com o mundo exterior
-module firFilter(dataOut1,r_out,dataIn1, clk, rst, enable,rin);
-input rin;
+
+module firFilter(dataOut1,r_out,dataIn1,rIn1, clk, rst, enable);
 input clk,rst,enable;
 output [16-1:0]dataOut1;
 output r_out;
 input [16-1:0]dataIn1;
-//Fim da criação da interface com o mundo exterior
+input rIn1;
 //Fim da criação da interface com o mundo exterior
 wire [1-1:0]en_wire;
 wire [16-1:0]n9;
@@ -38,7 +37,7 @@ assign clock_wire= clk;
 assign dataOut1=n17;
 assign r_out = n15;
 assign n14=dataIn1;
-assign n16 = rin;
+assign n16=rIn1;
 REG #(.N(16),.I(1.0E-8)) REG0(.CLK(clock_wire),.RST(reset_wire),.EN(en_wire),.R_IN(n1),.D_IN(n0),.R_OUT(n3),.D_OUT(n2));
 MULI #(.N(16),.I(4)) MULI1(.CLK(clock_wire),.RST(reset_wire),.EN(en_wire),.R_IN(n16),.D_IN(n14),.R_OUT(n1),.D_OUT(n0));
 MULI #(.N(16),.I(3)) MULI2(.CLK(clock_wire),.RST(reset_wire),.EN(en_wire),.R_IN(n16),.D_IN(n14),.R_OUT(n4),.D_OUT(n5));
